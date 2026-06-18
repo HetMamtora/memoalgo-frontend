@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      Baseline SEO. The Landing page (Day 9) is the only public, indexable
+      route -- everything else sits behind auth -- so this is the tag set
+      that actually matters for search. Per-page <title>/description
+      overrides and og: tags land on Day 15 once there's real copy to put
+      in them; this is just a correct, non-empty default so the site isn't
+      shipped with placeholder Vite boilerplate in the meantime.
+    -->
+    <title>MemoAlgo -- Spaced Repetition for DSA Revision</title>
+    <meta
+      name="description"
+      content="MemoAlgo schedules your DSA problem revisions automatically using spaced repetition, so the patterns you've already learned don't fade."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!--
+      Anti-FOUC theme script. Runs before React mounts so there is never a
+      flash of the light theme for a user who prefers dark. ThemeContext
+      (Day 9) is the only thing that *writes* to localStorage('theme') --
+      this script only *reads* it, so the two stay in sync by construction.
+    -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var prefersDark =
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = stored === 'dark' || (stored !== 'light' && prefersDark);
+          if (isDark) document.documentElement.classList.add('dark');
+        } catch (e) {
+          /* localStorage unavailable (e.g. private mode) -- default light */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

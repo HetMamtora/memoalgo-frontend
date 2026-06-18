@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ----------------------------------------------------------------------
+ * Design tokens -- copied verbatim from the Day 7 design system doc.
+ * Tailwind config (tailwind.config.js) maps utility classes to these
+ * variables, so a component written once works correctly in both themes.
+ * -------------------------------------------------------------------- */
+:root {
+  --ma-bg: #faf9f5;
+  --ma-surface: #ffffff;
+  --ma-border: #e5e2d9;
+  --ma-text: #211f1c;
+  --ma-text-secondary: #6b6862;
+  --ma-text-tertiary: #9c988f;
+  --ma-accent-link: #0f6e56;
+  --ma-accent-btn: #0f6e56;
+  --ma-accent-btn-text: #ffffff;
+  --ma-accent-bg: #e1f5ee;
+  --ma-success-bg: #e1f5ee;
+  --ma-success-text: #0f6e56;
+  --ma-warning-bg: #faeeda;
+  --ma-warning-text: #854f0b;
+  --ma-danger-bg: #faece7;
+  --ma-danger-text: #993c1d;
+}
+
+:root.dark {
+  --ma-bg: #15171c;
+  --ma-surface: #1c1f26;
+  --ma-border: #2e323c;
+  --ma-text: #ededea;
+  --ma-text-secondary: #a6a49c;
+  --ma-text-tertiary: #6f726f;
+  --ma-accent-link: #5dcaa5;
+  --ma-accent-btn: #1d9e75;
+  --ma-accent-btn-text: #06241b;
+  --ma-accent-bg: #085041;
+  --ma-success-bg: #085041;
+  --ma-success-text: #9fe1cb;
+  --ma-warning-bg: #633806;
+  --ma-warning-text: #fac775;
+  --ma-danger-bg: #712b13;
+  --ma-danger-text: #f5c4b3;
+}
+
+html,
+body {
+  background-color: var(--ma-bg);
+  color: var(--ma-text);
+}
+
+body {
+  @apply font-sans text-body antialiased;
+}
+
+/* Visible keyboard focus everywhere -- accessibility floor, not optional. */
+:focus-visible {
+  outline: 2px solid var(--ma-accent-link);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
