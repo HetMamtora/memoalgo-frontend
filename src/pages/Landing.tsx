@@ -6,17 +6,17 @@ const FEATURES = [
     {
         Icon: IconReview,
         title: 'Spaced repetition, done right',
-        body: "Built on the SM-2 algorithm -- the same math behind Anki -- reviews surface exactly when you're about to forget, not on a fixed schedule.",
+        body: "Built on the SM-2 algorithm, the same math behind Anki, reviews surface exactly when you're about to forget, not on a fixed schedule",
     },
     {
         Icon: IconLibrary,
         title: 'Track Every Problem',
-        body: 'Log what you solve by topic and difficulty, then let the schedule tell you what actually needs revisiting today.',
+        body: 'Log what you solve by topic and difficulty, then let the schedule tell you what actually needs revisiting today',
     },
     {
         Icon: IconStats,
         title: 'See your progress',
-        body: 'Streaks, retention rate, and topic-level weak spots, updated automatically after every review.',
+        body: 'Streaks, retention rate, and topic-level weak spots, updated automatically after every review',
     }
 ]
 
@@ -34,7 +34,7 @@ const STEPS = [
   {
     number: '3',
     title: 'Rate your recall',
-    body: 'One tap reschedules the next review automatically, easy problems space out, hard ones come back sooner.',
+    body: 'One tap reschedules next review automatically, easy problems space out, hard ones come back sooner',
   },
 ]
 
@@ -69,7 +69,7 @@ export function Landing() {
             </header>
 
             <section className="flex flex-col items-center gap-5 px-4 py-16 text-center md:py-24">
-                <h1 className="max-w-2xl text-hero text-text">
+                <h1 className="max-w-2xl text-hero text-accent-link">
                     Never forget a DSA Pattern again
                 </h1>
                 <p className="max-w-xl text-body text-text-secondary md:text-card-title">
@@ -93,7 +93,7 @@ export function Landing() {
                 ))}
             </section>
 
-            <section className="flex flex-col gap-8 px-4 py-12 md:px-8 md:py-16">
+            <section className="border-y border-border bg-surface px-4 py-12 md:px-8 md:py-16">
                 <h2 className="text-center text-section text-text">How it works</h2>
                 <div className="grid gap-6 md:grid-cols-3">
                     {STEPS.map(({ number, title, body }) => (
