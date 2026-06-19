@@ -23,18 +23,18 @@ const FEATURES = [
 const STEPS = [
   {
     number: '1',
-    title: 'Add a problem',
-    body: "Log a problem you've solved -- title, difficulty, and topic.",
+    title: "Add what you've solved",
+    body: "Log problems from LeetCode or any where else, in seconds",
   },
   {
     number: '2',
-    title: "Review when it's due",
-    body: 'MemoAlgo tells you exactly which problems need another look today.',
+    title: "MemoAlgo Schedules your reviews",
+    body: 'SM-2 Algorithm for spaced repetition decides exactly when each problem resurfaces',
   },
   {
     number: '3',
     title: 'Rate your recall',
-    body: 'One tap reschedules the next review automatically -- easy problems space out, hard ones come back sooner.',
+    body: 'One tap reschedules the next review automatically, easy problems space out, hard ones come back sooner.',
   },
 ]
 
@@ -70,11 +70,10 @@ export function Landing() {
 
             <section className="flex flex-col items-center gap-5 px-4 py-16 text-center md:py-24">
                 <h1 className="max-w-2xl text-hero text-text">
-                    Stop forgetting the DSA patterns you already learned
+                    Never forget a DSA Pattern again
                 </h1>
                 <p className="max-w-xl text-body text-text-secondary md:text-card-title">
-                    MemoAlgo schedules your problem revisions automatically with spaced repetition --
-                    so today's grind doesn't evaporate before your next interview.
+                    Spaced Repetition build for the problems you've already solved. Know exactly what to revise everyday.
                 </p>
                 <Link to="/register" className={`${ctaClasses} px-6 py-2.5 text-body`}>
                     Get started free
