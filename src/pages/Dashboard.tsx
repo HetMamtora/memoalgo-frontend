@@ -3,6 +3,7 @@ import { useAuth } from "@/hooks/useAuth"
 import { useStats } from "@/hooks/useStats"
 import { StatCard } from '@/components/dashboard/StatCard'
 import { EmptyState } from '@/components/common/EmptyState'
+import { WeakestTopics } from '@/components/dashboard/WeekestTopics'
 
 export function Dashboard() {
     const { user } = useAuth()
@@ -51,6 +52,8 @@ export function Dashboard() {
                     >
                         Start review session
                     </Link>
+
+                    <WeakestTopics retentionByTopic={stats.retentionByTopic} />
                 </>
             )}
 
@@ -59,8 +62,7 @@ export function Dashboard() {
           Deliberately omitted -- StatsResponse.problemsByTopic is a count
           map (how many problems per topic), not an accuracy/retention
           metric per topic. The backend doesn't currently compute or
-          expose that. Worth deciding before Day 12 (Stats page): either
-          add a per-topic retention calculation server-side, or drop this
+          expose that. Either add a per-topic retention calculation server-side, or drop this
           widget from the spec. */}
         </div>
     )
