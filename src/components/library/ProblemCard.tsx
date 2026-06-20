@@ -1,6 +1,7 @@
 import { Badge } from "@/components/common/Badge"
 import { DIFFICULTY_LABEL, DIFFICULTY_VARIANT } from "@/utils/difficulty"
 import type { ProblemResponse } from "@/types"
+import { formatDueDate, isDueOrOverdue } from "@/utils/dates"
 
 interface ProblemCardProps {
     problem: ProblemResponse
@@ -29,14 +30,17 @@ export function ProblemCard({ problem, onEdit, onDelete }: ProblemCardProps) {
                 )}
             </div>
 
-            {/* NOTE: the spec also calls for a due-date badge here ("colored dot +
-          title + difficulty pill + due date"). Omitted deliberately --
-          ProblemResponse has no due-date field, and ReviewSessionResponse's
-          dueProblems are also plain ProblemResponse objects without one.
-          Per-problem next-review-date isn't exposed by any current
-          endpoint. Either ProblemResponse needs a nextReviewDate field
-          added backend-side, or the Library needs a second call to cross-
-          reference against /reviews/due. Worth deciding before Day 11. */}
+            {problem.nextReviewDate && (
+                <span
+                    className={`flex-shrink-0 text-body-secondary ${
+                        isDueOrOverdue(problem.nextReviewDate)
+                            ? 'font-medium text-warning-text'
+                            : 'text-text-tertiary'
+                        }`}
+                >
+                    {formatDueDate(problem.nextReviewDate)}
+                </span>
+            )}
 
             <Badge variant={DIFFICULTY_VARIANT[problem.difficulty]}>
                 {DIFFICULTY_LABEL[problem.difficulty]}

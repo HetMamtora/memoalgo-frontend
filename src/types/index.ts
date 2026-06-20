@@ -71,6 +71,8 @@ export interface ProblemResponse {
   topicId: string | null
   topicName: string | null
   tags: string[]
+  /** null until the problem has been reviewed at least once. */
+  nextReviewDate: string | null // YYYY-MM-DD (LocalDate), or null
   createdAt: string
   updatedAt: string
 }
@@ -117,6 +119,8 @@ export interface StatsResponse {
   retentionRate: number // 0-100
   problemsByDifficulty: Record<string, number>
   problemsByTopic: Record<string, number>
+  /** % rated Good/Easy per topic, 0-100. Only includes topics with >= 1 review. */
+  retentionByTopic: Record<string, number>
 }
 
 // ---------------------------------------------------------------------
