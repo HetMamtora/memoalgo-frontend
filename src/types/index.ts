@@ -121,6 +121,8 @@ export interface StatsResponse {
   problemsByTopic: Record<string, number>
   /** % rated Good/Easy per topic, 0-100. Only includes topics with >= 1 review. */
   retentionByTopic: Record<string, number>
+  /** Review count per day, keyed by ISO date "YYYY-MM-DD". Days with 0 reviews are absent. */
+  reviewsByDay: Record<string, number>
 }
 
 // ---------------------------------------------------------------------
