@@ -1,5 +1,56 @@
-import { ComingSoon } from "@/components/common/ComingSoon"
+import { Link } from 'react-router-dom'
+import { useStats } from '@/hooks/useStats'
+import { StatCard } from '@/components/dashboard/StatCard'
+import { TopicsChart } from '@/components/stats/TopicsChart'
+import { DifficultyBreakdown } from '@/components/stats/DifficultyBreakdown'
+import { ActivityHeatmap } from '@/components/stats/ActivityHeatmap'
+import { EmptyState } from '@/components/common/EmptyState'
 
 export function Stats() {
-    return <ComingSoon title="Stats" day={12} />
+
+    const { stats, isLoading, error } = useStats()
+
+    return (
+        <div className='flex flex-col gap-6'>
+            <h1 className='text-section text-text'>Stats</h1>
+
+            {error && <p className='text-body text-danger-text'>{error}</p>}
+
+            {!error && isLoading && (
+                <p className='text-body-secondary text-text-tertiary'>Loading Stats...</p>
+            )}
+
+            {!error && !isLoading && stats && stats.totalReviews === 0 && (
+                <EmptyState
+                    title='Not enough data yet'
+                    body='Complete a few review sessions and your stats will start showing up here'
+                    action={
+                        <Link
+                            to='/app/review'
+                            className='rounded-md bg-accent px-4 py-2 text-body-secondary font-medium text-accent-text hover:opacity-90'
+                        >
+                            Start reviewing
+                        </Link>
+                    }
+                />
+            )}
+
+            {!error && !isLoading && stats && stats.totalReviews > 0 && (
+                <>
+                    <div className='grid grid-cols-2 gap-4 md:grid-cols-3'>
+                        <StatCard label='Retention' value={`${Math.round(stats.retentionRate)}%`} />
+                        <StatCard label='Day streak' value={stats.currentStreak} />
+                        <StatCard label='Total reviews' value={stats.totalReviews} />
+                    </div>
+
+                    <div className='grid gap-6 md:grid-cols-2'>
+                        <TopicsChart problemsByTopic={stats.problemsByTopic} />
+                        <DifficultyBreakdown problemsByDifficulty={stats.problemsByDifficulty} />
+                    </div>
+
+                    <ActivityHeatmap reviewsByDay={stats.reviewsByDay} />
+                </>
+            )}
+        </div>
+    )
 }
