@@ -2,19 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MemoAlgo" />
+<link rel="manifest" href="/site.webmanifest" />
 
     <!--
-      Baseline SEO. Pending to be Added
+      Baseline SEO. The Landing page is the only public, indexable route --
+      everything else sits behind auth -- so this is the tag set that
+      actually matters for search and for link-preview cards (Slack,
+      Twitter, LinkedIn, iMessage, Discord, etc).
     -->
-    <title>MemoAlgo - Spaced Repetition for DSA Revision</title>
+    <title>MemoAlgo - Never Forget A DSA Pattern Again</title>
     <meta
       name="description"
-      content="MemoAlgo schedules your DSA problem revisions automatically using spaced repetition, so the patterns you've already learned don't fade."
+      content="Spaced Repetition built for problems you've already solved."
     />
     <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://memoalgo.dev/" />
 
+    <!-- Open Graph (Slack, LinkedIn, Discord, Facebook, iMessage, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://memoalgo.dev/" />
+    <meta property="og:title" content="MemoAlgo -- Never Forget A DSA Pattern Again" />
+    <meta
+      property="og:description"
+      content="Spaced Repetition built for problems you've already solved."
+    />
+    <meta property="og:image" content="https://memoalgo.dev/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="MemoAlgo" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MemoAlgo - Never Forget A DSA Pattern Again" />
+    <meta
+      name="twitter:description"
+      content="Spaced Repetition built for problems you've already solved."
+    />
+    <meta name="twitter:image" content="https://memoalgo.dev/og-image.png" />
+
+    <!--
+      Anti-FOUC theme script. Runs before React mounts so there is never a
+      flash of the light theme for a user who prefers dark. ThemeContext
+      is the only thing that *writes* to localStorage('theme') -- this
+      script only *reads* it, so the two stay in sync by construction.
+    -->
     <script>
       (function () {
         try {
