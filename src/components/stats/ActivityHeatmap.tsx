@@ -77,7 +77,7 @@ export function ActivityHeatmap({ reviewsByDay }: ActivityHeatmapProps) {
 
   return (
     <div className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4">
-        <h2 className="text-card-title text-text">Activity</h2>
+        <h2 className="text-card-title text-text">Activity, last 5 weeks</h2>
 
         <div className="flex gap-2">
             {/* Day labels (Mon-Sun) */}

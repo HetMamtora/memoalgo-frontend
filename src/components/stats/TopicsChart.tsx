@@ -12,19 +12,15 @@ export function TopicsChart({ problemsByTopic }: TopicsChartProps) {
     return (
         <div className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4">
             <h2 className="text-card-title text-text">Problems by topic</h2>
-            <div className="flex flex-col gap-2">
+            <div className="flex h-36 items-end gap-3">
                 {entries.map(([topic, count]) => (
-                    <div key={topic} className="flex flex-col gap-1">
-                        <div className="flex items-center justify-between text-body-secondary">
-                            <span className="text-text-secondary">{topic}</span>
-                            <span className="text-text-tertiary">{count}</span>
-                        </div>
-                        <div className="h-2 overflow-hidden rounded-full bg-bg">
-                            <div
-                                className="h-full rounded-full bg-accent transition-all duration-300"
-                                style={{ width: `${(count / max) * 100}%` }}
-                            />
-                        </div>
+                    <div key={topic} className="flex flex-1 flex-col items-center gap-2">
+                        <div 
+                            title={`${topic}: ${count}`}
+                            className="w-full rounded-t-md bg-accent-bg"
+                            style={{ height: `${Math.max((count / max) * 100, 8)}%` }}
+                        />
+                            <span className="truncate text-caption text-text-tertiary">{topic}</span>
                     </div> 
                 ))}
             </div>

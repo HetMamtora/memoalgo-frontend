@@ -38,17 +38,17 @@ export function Stats() {
             {!error && !isLoading && stats && stats.totalReviews > 0 && (
                 <>
                     <div className='grid grid-cols-2 gap-4 md:grid-cols-3'>
-                        <StatCard label='Retention' value={`${Math.round(stats.retentionRate)}%`} />
-                        <StatCard label='Day streak' value={stats.currentStreak} />
-                        <StatCard label='Total reviews' value={stats.totalReviews} />
+                        <StatCard label='Retention Rate' value={`${Math.round(stats.retentionRate)}%`} accent />
+                        <StatCard label='Day Streak' value={stats.currentStreak} />
+                        <StatCard label='Total Reviews' value={stats.totalReviews} />
                     </div>
+
+                    <TopicsChart problemsByTopic={stats.problemsByTopic} />
 
                     <div className='grid gap-6 md:grid-cols-2'>
-                        <TopicsChart problemsByTopic={stats.problemsByTopic} />
                         <DifficultyBreakdown problemsByDifficulty={stats.problemsByDifficulty} />
+                        <ActivityHeatmap reviewsByDay={stats.reviewsByDay} />
                     </div>
-
-                    <ActivityHeatmap reviewsByDay={stats.reviewsByDay} />
                 </>
             )}
         </div>
