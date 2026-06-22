@@ -76,12 +76,17 @@ export function Login() {
           Sign in
         </Button>
 
-        <p className="text-center text-body-secondary text-text-secondary">
-          New here?{' '}
-          <Link to="/register" className="text-accent-link hover:underline">
-            Create account
+        <div className="flex flex-col items-center gap-2 text-body-secondary text-text-secondary">
+          <Link to="/forgot-password" className="text-accent-link hover:underline">
+            Forgot password?
           </Link>
-        </p>
+          <p>
+            New here?{' '}
+            <Link to="/register" className="text-accent-link hover:underline">
+              Create account
+            </Link>
+          </p>
+        </div>
       </form>
     </AuthLayout>
   )

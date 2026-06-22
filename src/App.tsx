@@ -9,6 +9,7 @@ import { Dashboard } from './pages/Dashboard'
 import { Library } from './pages/Library'
 import { Review } from './pages/Review'
 import { Stats } from './pages/Stats'
+import { ForgotPassword } from './pages/ForgotPassword'
 
 function App() {
   return (
@@ -16,10 +17,10 @@ function App() {
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path='/forgot-password' element={<ForgotPassword />} />
 
-      {/* Everything under this guard requires a valid session. Day 9
-          replaces AppPlaceholder with the real App Shell + nested
-          Dashboard/Library/Review/Stats routes. */}
+      {/* Everything under here requires a valid session (ProtectedRoute)
+          and shares the App Shell (Sidebar/BottomNav/MobileHeader). */}
       <Route element={<ProtectedRoute />}>
         <Route element={<AppShell />}>
           <Route path='/app' element={<Dashboard />} />
