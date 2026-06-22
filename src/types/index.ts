@@ -24,6 +24,22 @@ export interface AuthResponse {
   username: string
 }
 
+export interface OtpResponse {
+  message: string
+  email: string
+  expiresInMinutes: number
+}
+
+export interface VerifyOtpRequest {
+  email: string
+  otp: string
+}
+ 
+export interface InitiatePasswordResetRequest {
+  email: string
+  newPassword: string
+}
+
 // ---------------------------------------------------------------------
 // Users
 // ---------------------------------------------------------------------

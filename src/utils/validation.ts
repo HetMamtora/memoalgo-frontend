@@ -24,3 +24,12 @@ export function validateUsername(value: string): string | undefined {
   }
   return undefined
 }
+
+export function validateConfirmPassword(
+  password: string,
+  confirmPassword: string
+): string | undefined {
+  if (!confirmPassword) return 'Confirm your password'
+  if (password !== confirmPassword) return 'Passwords do not match'
+  return undefined
+}

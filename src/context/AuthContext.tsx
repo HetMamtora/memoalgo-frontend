@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState, type ReactNode } from 'react'
 import * as authService from '@/services/auth'
 import { clearToken, getToken, setToken } from '@/utils/localStorage'
-import type { LoginRequest, RegisterRequest, UserResponse } from '@/types'
+import type { LoginRequest, AuthResponse, UserResponse } from '@/types'
 
 export interface AuthContextValue {
   user: UserResponse | null
@@ -9,7 +9,12 @@ export interface AuthContextValue {
   isLoading: boolean
   isAuthenticated: boolean
   login: (data: LoginRequest) => Promise<void>
-  register: (data: RegisterRequest) => Promise<void>
+  /**
+   * Stores the token from any AuthResponse and hydrates the user.
+   * Called by both Register (after OTP verify) and ForgotPassword
+   * (after reset verify) — neither of those goes through login().
+   */
+  authenticateWithResponse: (auth: AuthResponse) => Promise<void>
   logout: () => void
 }
 
@@ -43,18 +48,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .finally(() => setIsLoading(false))
   }, [])
 
-  async function login(data: LoginRequest) {
-    const auth = await authService.login(data)
+  async function authenticateWithResponse(auth: AuthResponse) {
     setToken(auth.accessToken)
     const me = await authService.getCurrentUser()
     setUser(me)
   }
 
-  async function register(data: RegisterRequest) {
-    const auth = await authService.register(data)
-    setToken(auth.accessToken)
-    const me = await authService.getCurrentUser()
-    setUser(me)
+  async function login(data: LoginRequest) {
+    const auth = await authService.login(data)
+    await authenticateWithResponse(auth)
+    // setToken(auth.accessToken)
+    // const me = await authService.getCurrentUser()
+    // setUser(me)
   }
 
   function logout() {
@@ -67,7 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isLoading,
     isAuthenticated: user !== null,
     login,
-    register,
+    authenticateWithResponse,
     logout,
   }
 
