@@ -1,4 +1,4 @@
-import { useEffect, type MouseEvent, type ReactNode } from "react"
+import { useEffect, useRef, type MouseEvent, type ReactNode } from "react"
 
 interface ModalProps {
     isOpen: boolean
@@ -8,6 +8,8 @@ interface ModalProps {
 }
 
 export function Modal({ isOpen, onClose, title, children }: ModalProps) {
+    const dialogRef = useRef<HTMLDivElement>(null)
+
     useEffect(() => {
         if(!isOpen) return
         function handleKeyDown(e: KeyboardEvent) {
@@ -17,6 +19,16 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
         document.addEventListener('keydown', handleKeyDown)
         return () => document.removeEventListener('keydown', handleKeyDown)
     }, [isOpen, onClose])
+
+    useEffect(() => {
+        if (!isOpen) return
+        const target =
+            dialogRef.current?.querySelector<HTMLElement>('input, select, textarea') ??
+            dialogRef.current?.querySelector<HTMLElement>(
+                'button, a[href], [tabindex]:not([tabindex="-1"])'
+            )
+        target?.focus()
+    }, [isOpen])
 
     if(!isOpen) return null
 
@@ -31,6 +43,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
         >
             {/* Full-screen sheet on mobile, centered rounded card on desktop. */}
             <div
+                ref={dialogRef}
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="modal-title"
