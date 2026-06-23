@@ -3,11 +3,14 @@ import { useAuth } from "@/hooks/useAuth"
 import { useStats } from "@/hooks/useStats"
 import { StatCard } from '@/components/dashboard/StatCard'
 import { EmptyState } from '@/components/common/EmptyState'
+import { DashboardSkeleton } from '@/components/dashboard/DashboardSkeleton'
 import { WeakestTopics } from '@/components/dashboard/WeekestTopics'
 
 export function Dashboard() {
     const { user } = useAuth()
     const { stats, isLoading, error } = useStats()
+
+    if (isLoading) return <DashboardSkeleton />
 
     return (
         <div className="flex flex-col gap-6">
@@ -56,14 +59,6 @@ export function Dashboard() {
                     <WeakestTopics retentionByTopic={stats.retentionByTopic} />
                 </>
             )}
-
-            {/* NOTE: the spec also calls for a "Weakest topics" widget (2 bar
-          charts showing per-topic accuracy, e.g. "Graphs 38%, DP 61%").
-          Deliberately omitted -- StatsResponse.problemsByTopic is a count
-          map (how many problems per topic), not an accuracy/retention
-          metric per topic. The backend doesn't currently compute or
-          expose that. Either add a per-topic retention calculation server-side, or drop this
-          widget from the spec. */}
         </div>
     )
 }

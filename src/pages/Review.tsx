@@ -2,6 +2,7 @@ import { useReviews } from "@/hooks/useReviews"
 import { ReviewCard } from "@/components/review/ReviewCard"
 import { SessionComplete } from "@/components/review/SessionComplete"
 import { NothingDue } from "@/components/review/NothingDue"
+import { ReviewSkeleton } from '@/components/review/ReviewSkeleton'
 
 export function Review() {
     
@@ -19,9 +20,7 @@ export function Review() {
         <div  className="mx-auto flex max-w-lg flex-col gap-4">
             <h1 className="text-section text-text">Review Session</h1>
 
-            {phase === 'loading' && (
-                <p className="text-body-secondary text-text-tertiary">Loading due problems...</p>
-            )}
+            {phase === 'loading' && <ReviewSkeleton />}
 
             {phase === 'empty' && !error && <NothingDue />}
 

@@ -4,6 +4,7 @@ import { StatCard } from '@/components/dashboard/StatCard'
 import { TopicsChart } from '@/components/stats/TopicsChart'
 import { DifficultyBreakdown } from '@/components/stats/DifficultyBreakdown'
 import { ActivityHeatmap } from '@/components/stats/ActivityHeatmap'
+import { StatsSkeleton } from '@/components/stats/StatsSkeleton'
 import { EmptyState } from '@/components/common/EmptyState'
 
 export function Stats() {
@@ -16,9 +17,7 @@ export function Stats() {
 
             {error && <p className='text-body text-danger-text'>{error}</p>}
 
-            {!error && isLoading && (
-                <p className='text-body-secondary text-text-tertiary'>Loading Stats...</p>
-            )}
+            {!error && isLoading && <StatsSkeleton />}
 
             {!error && !isLoading && stats && stats.totalReviews === 0 && (
                 <EmptyState

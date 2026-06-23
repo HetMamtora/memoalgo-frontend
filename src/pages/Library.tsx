@@ -3,6 +3,7 @@ import { useProblems } from '@/hooks/useProblems'
 import { useTopics } from '@/hooks/useTopics'
 import { ProblemCard } from '@/components/library/ProblemCard'
 import { ProblemFormModal } from '@/components/library/ProblemFormModal'
+import { LibrarySkeleton } from '@/components/library/LibrarySkeleton'
 import { EmptyState } from '@/components/common/EmptyState'
 import { Button } from '@/components/common/Button'
 import { Input } from '@/components/common/Input'
@@ -14,6 +15,7 @@ const DIFFICULTY_FILTERS: {label: string; value: Difficulty | undefined}[] = [
     {label:'Medium' , value:'MEDIUM' },
     {label:'Hard' , value:'HARD' },
 ]
+
 export function Library() {
 
     const [difficulty, setDifficulty] = useState<Difficulty | undefined>(undefined)
@@ -99,9 +101,7 @@ export function Library() {
 
             {error && <p className="text-body text-danger-text">{error}</p>}
  
-            {!error && isLoading && (
-                <p className="text-body-secondary text-text-tertiary">Loading problems...</p>
-            )}
+            {!error && isLoading && <LibrarySkeleton />}
 
             {!error && !isLoading && visibleProblems.length === 0 && (
                 <EmptyState
