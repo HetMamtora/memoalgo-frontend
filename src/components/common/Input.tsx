@@ -19,7 +19,7 @@ export function Input({ label, error, hint, id, className = '', ...rest }: Input
       </label>
       <input
         id={inputId}
-        className={`rounded-md border bg-surface px-3 py-2 text-body text-text
+        className={`rounded-md border bg-surface px-3 py-2 text-[16px] text-text md:text-body
           placeholder:text-text-tertiary
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-link
           ${error ? 'border-danger-text' : 'border-border'} ${className}`}

@@ -2,12 +2,6 @@ import { Button } from '@/components/common/Button'
 import { Logo } from '@/components/common/Logo'
 import { useAuth } from '@/hooks/useAuth'
 
-/**
- * TEMPORARY. Day 9 replaces this with the real App Shell (sidebar/bottom
- * nav) and routes to Dashboard/Library/Review/Stats. This page exists
- * purely so the Day 8 auth flow has somewhere real to land and can be
- * clicked through end-to-end.
- */
 export function AppPlaceholder() {
   const { user, logout } = useAuth()
 
