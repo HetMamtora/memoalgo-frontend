@@ -64,7 +64,7 @@ export function Library() {
     }
 
     return (
-        <div className='flex flex-col gap-4'>
+        <div className='flex h-full flex-col gap-4 overflow-hidden'>
             <div className="flex items-center justify-between gap-3">
                 <h1 className="text-section text-text">Problem Library</h1>
                 <Button type="button" onClick={openAddModal}>
@@ -101,32 +101,35 @@ export function Library() {
 
             {error && <p className="text-body text-danger-text">{error}</p>}
  
-            {!error && isLoading && <LibrarySkeleton />}
 
-            {!error && !isLoading && visibleProblems.length === 0 && (
-                <EmptyState
-                    title="No problems here yet"
-                    body="Add a problem you've solved and MemoAlgo will start scheduling its reviews."
-                    action={
-                        <Button type="button" onClick={openAddModal}>
-                            Add your first problem
-                        </Button>
-                    }
-                />
-            )}
+            <div className='flex-1 overflow-y-auto'>
+                {!error && isLoading && <LibrarySkeleton />}
 
-            {!error && !isLoading && visibleProblems.length > 0 && (
-                <div className="flex flex-col gap-2">
-                    {visibleProblems.map((problem) => (
-                        <ProblemCard
-                            key={problem.id}
-                            problem={problem}
-                            onEdit={() => openEditModal(problem)}
-                            onDelete={() => handleDelete(problem)}
-                        />
-                    ))}
-                </div>
-            )}
+                {!error && !isLoading && visibleProblems.length === 0 && (
+                    <EmptyState
+                        title="No problems here yet"
+                        body="Add a problem you've solved and MemoAlgo will start scheduling its reviews."
+                        action={
+                            <Button type="button" onClick={openAddModal}>
+                                Add your first problem
+                            </Button>
+                        }
+                    />
+                )}
+
+                {!error && !isLoading && visibleProblems.length > 0 && (
+                    <div className="flex flex-col gap-2">
+                        {visibleProblems.map((problem) => (
+                            <ProblemCard
+                                key={problem.id}
+                                problem={problem}
+                                onEdit={() => openEditModal(problem)}
+                                onDelete={() => handleDelete(problem)}
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
 
             {modalOpen && (
                 <ProblemFormModal
